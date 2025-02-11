@@ -1,0 +1,14 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens33: {}
+  vlans:
+    vlan10:
+      id: 10
+      link: ens33
+      addresses: [10.0.0.11/24]
+      routes:
+        - to: default
+          via: 10.0.0.1
+          metric: 100
