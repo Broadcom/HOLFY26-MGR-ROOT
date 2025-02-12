@@ -1,5 +1,5 @@
 #!/bin/sh
-# 16-December 2024
+# 12-February 2025
 
 clear_mount () {
    # make sure we have clean mount points
@@ -15,7 +15,7 @@ fi
 }
 
 secure_holuser () {
-  if [ "${vlp_cloud}" != "NOT REPORTED" ] && [ ${lock} ];then
+  if [ "${vlp_cloud}" != "NOT REPORTED" ] ;then
     echo "PRODUCTION - SECURING HOLUSER."
     cat ~root/test2.txt | mcrypt -d -k bca -q > ~root/clear.txt
     pw=`cat ~root/clear.txt`
@@ -39,10 +39,6 @@ END
  fi
 }
 
-
-# fix a security hole for the holuser account but not for 24.04 because group files are different
-cat /etc/group | sed s/sudo:x:27:holuser/sudo:x:27:/ > /tmp/group
-mv /tmp/group /etc/group
 
 maincon="mainconsole"
 # the password MUST be hardcoded here in order to complete the mount
@@ -136,13 +132,6 @@ while [ ! -f $configini ];do
    echo "Waiting for ${configini}..."
    sleep 3
 done
-lockholuser=true
-lockholuser=`grep 'lockholuser =' $configini | grep -v \# | cut -f2 -d= | sed 's/\r$//'`
-if [ ${lockholuser} = true ];then
-   lock=true
-else
-   lock=false
-fi
 
 # retrieve the cloud org from the vApp Guest Properties (is this prod or dev?)
 # as of March 15, 2024 not getting guestinfo.ovfEnv
