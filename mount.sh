@@ -1,5 +1,5 @@
 #!/bin/sh
-# 12-February 2025
+# 18-February 2025
 
 clear_mount () {
    # make sure we have clean mount points
@@ -154,7 +154,7 @@ secure_holuser
 sshoptions='-o StrictHostKeyChecking=accept-new'
 if [ $LMC = true ];then
    # remove the manager bookmark from nautilus
-   if [ "${vlp_cloud}" != "NOT REPORTED" ] && [ ${lock} ];then
+   if [ "${vlp_cloud}" != "NOT REPORTED" ] ;then
       echo "Removing manager bookmark from Nautilus."
       sshpass -p ${password} scp ${sshoptions} ${lmcbookmarks} /root/bookmarks.orig
       cat bookmarks.orig | grep -vi manager > /root/bookmarks
