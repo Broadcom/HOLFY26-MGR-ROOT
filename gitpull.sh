@@ -1,5 +1,5 @@
 #! /bin/sh
-# version 1.1 - 11-October 2024
+# version 1.2 - 20-February 2025
 
 # the only job of this script is to do the initial git pull for the root account
 
@@ -12,17 +12,12 @@ logfile='/tmp/mount.log'
 
 cd /root
 
-internalgit=10.138.147.254
-externalgit=holgitlab.oc.vmware.com
-
-status=`ssh -o ConnectTimeout=5 -T git@$internalgit`
-if [ $? != 0 ];then
-   repodir='/root/.git'
-   cat /root/.git/config | sed s/$internalgit/$externalgit/g > /root/.git/newconfig
-      mv /root/.git/config /root/.git/oldconfig
-      mv /root/.git/newconfig /root/.git/config
-      chmod 664 /root/.git/config
-fi
+proxyready=`nmap -p 3128 proxy | grep open`
+while [ $? != 0 ];do
+   echo "Waiting for proxy to be ready..." >> ${logfile}
+   proxyready=`nmap -p 3128 proxy | grep open`
+   sleep 1
+done
 
 ctr=0
 while true;do
