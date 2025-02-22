@@ -27,6 +27,8 @@ END
     if [ -f ~holuser/.ssh/authorized_keys ];then
        mv ~holuser/.ssh/authorized_keys ~holuser/.ssh/unauthorized_keys
     fi
+    # secure the router
+    /usr/bin/sshpass -p $pw ssh -o StrictHostKeyChecking=accept-new root@router "rm /root/.ssh/authorized_keys"
  else
    echo "NORMAL HOLUSER."
      passwd holuser <<END
@@ -40,7 +42,7 @@ END
 }
 
 
-maincon="mainconsole"
+maincon="console"
 # the password MUST be hardcoded here in order to complete the mount
 password="VMware123!"
 configini="/tmp/config.ini"
@@ -101,10 +103,10 @@ fi
 while true;do
    ping -c 4 $maincon > /dev/null
    if [ $? = 0 ];then
-      echo "Main Console is responsive. Performing remote mount..."
+      echo "Console is responsive. Performing remote mount..."
       break
    else
-      echo "Cannot reach Main Console. Will try again."
+      echo "Cannot reach Console. Will try again."
    fi
    sleep 2
 done

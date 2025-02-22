@@ -5,10 +5,10 @@ network:
     ens33:
       dhcp4: no
       addresses:
-        - 10.0.0.11/24
+        - 10.1.0.4/24
       routes:
         - to: default
-          via: 10.0.0.1
+          via: 10.1.0.1
           metric: 100
       nameservers:
-        addresses: [10.0.0.2, 8.8.8.8, 8.8.4.4]
+        addresses: [10.1.0.2, 8.8.8.8, 8.8.4.4]
