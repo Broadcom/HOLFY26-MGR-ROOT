@@ -1,5 +1,5 @@
 #!/bin/sh
-# 18-February 2025
+# 28-February 2025
 
 clear_mount () {
    # make sure we have clean mount points
@@ -44,7 +44,7 @@ END
 
 maincon="console"
 # the password MUST be hardcoded here in order to complete the mount
-password="VMware123!"
+password=`cat /home/holuser/creds.txt`
 configini="/tmp/config.ini"
 LMC=false
 lmcbookmarks="holuser@mainconsole:/home/holuser/.config/gtk-3.0/bookmarks"
