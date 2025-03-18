@@ -1,5 +1,5 @@
 #!/bin/sh
-# 28-February 2025
+# 18-March 2025
 
 clear_mount () {
    # make sure we have clean mount points
@@ -15,6 +15,8 @@ fi
 }
 
 secure_holuser () {
+  # update the holuser sudoers for installations on the manager
+  [ -f /root/holdoers ] && cp -p /root/holdoers /etc/sudoers.d/holdoers
   if [ "${vlp_cloud}" != "NOT REPORTED" ] ;then
     echo "PRODUCTION - SECURING HOLUSER."
     cat ~root/test2.txt | mcrypt -d -k bca -q > ~root/clear.txt
@@ -129,7 +131,9 @@ while [ ! -f /wmchol/hol/LabStartup.log ] && [ $LMC = false ];do
    sleep 2
 done
 
-# the holuser account copies the config.ini from the mainconsole (must wait for the mount)
+# the holuser account copies the config.ini to /tmp from 
+# either the mainconsole (must wait for the mount)
+# or from the vpodrepo
 while [ ! -f $configini ];do
    echo "Waiting for ${configini}..."
    sleep 3

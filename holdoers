@@ -1,0 +1,14 @@
+
+# User alias specification
+User_Alias HOLUSER = holuser
+
+# Cmnd alias specification
+Cmnd_Alias APT = /usr/bin/apt
+Cmnd_Alias APTGET = /usr/bin/apt-get
+Cmnd_Alias DPKG = /usr/bin/dpkg
+Cmnd_Alias SNAP = /usr/bin/snap
+
+HOLUSER ALL = NOPASSWD:APT
+HOLUSER ALL = NOPASSWD:APTGET
+HOLUSER ALL = NOPASSWD:DPKG
+HOLUSER ALL = NOPASSWD:SNAP
