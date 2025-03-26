@@ -1,5 +1,5 @@
 #!/bin/sh
-# 18-March 2025
+# 26-March 2025
 
 clear_mount () {
    # make sure we have clean mount points
@@ -49,7 +49,7 @@ maincon="console"
 password=`cat /home/holuser/creds.txt`
 configini="/tmp/config.ini"
 LMC=false
-lmcbookmarks="holuser@mainconsole:/home/holuser/.config/gtk-3.0/bookmarks"
+lmcbookmarks="holuser@${maincon}:/home/holuser/.config/gtk-3.0/bookmarks"
 
 clear_mount /wmchol
 clear_mount /lmchol
