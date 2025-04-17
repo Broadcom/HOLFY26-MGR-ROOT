@@ -1,6 +1,9 @@
 #!/bin/sh
+# legacy - not used any more - adding no-op code to just exit
 # version 1.6 23-February 2024
 # restartlsmgr.sh restarts the ~core/labstartupmgr.py script if not running
+
+exit
 
 # if not deployed by VLP exit
 orgVDC=`vmtoolsd --cmd 'info-get guestinfo.ovfenv' 2>&1 | grep vlp_org_name | cut -f 3 -d : | cut -f 2 -d \"`
