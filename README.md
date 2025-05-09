@@ -1,7 +1,4 @@
 # root-manager
-# dummy change for sync to external GitHub.
-
-
 
 ## Getting started
 
