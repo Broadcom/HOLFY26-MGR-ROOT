@@ -1,5 +1,5 @@
 #! /bin/sh
-# version 1.2 - 20-February 2025
+# version 1.3 - 09-May 2025
 
 # the only job of this script is to do the initial git pull for the root account
 
@@ -25,7 +25,7 @@ while true;do
       echo "FATAL could not perform git pull." >> ${logfile}
       exit  # do we exit here or just report?
    fi
-   git pull origin master >> ${logfile} 2>&1
+   git pull origin main >> ${logfile} 2>&1
    if [ $? = 0 ];then
       > /tmp/rootgitdone
       break
