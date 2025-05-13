@@ -1,5 +1,5 @@
 #!/bin/sh
-# 26-March 2025
+# 13-May 2025
 
 clear_mount () {
    # make sure we have clean mount points
@@ -17,6 +17,9 @@ fi
 secure_holuser () {
   # update the holuser sudoers for installations on the manager
   [ -f /root/holdoers ] && cp -p /root/holdoers /etc/sudoers.d/holdoers
+  # change permissions so non-privileged installs are allowed
+  chmod 666 /var/lib/dpkg/lock-frontent
+  chmod 666 /var/lib/dpkg/lock
   if [ "${vlp_cloud}" != "NOT REPORTED" ] ;then
     echo "PRODUCTION - SECURING HOLUSER."
     cat ~root/test2.txt | mcrypt -d -k bca -q > ~root/clear.txt
