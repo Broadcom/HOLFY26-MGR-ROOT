@@ -18,7 +18,7 @@ secure_holuser () {
   # update the holuser sudoers for installations on the manager
   [ -f /root/holdoers ] && cp -p /root/holdoers /etc/sudoers.d/holdoers
   # change permissions so non-privileged installs are allowed
-  chmod 666 /var/lib/dpkg/lock-frontent
+  chmod 666 /var/lib/dpkg/lock-frontend
   chmod 666 /var/lib/dpkg/lock
   if [ "${vlp_cloud}" != "NOT REPORTED" ] ;then
     echo "PRODUCTION - SECURING HOLUSER."
