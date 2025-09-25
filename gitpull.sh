@@ -12,10 +12,10 @@ logfile='/tmp/mount.log'
 
 cd /root
 
-proxyready=`nmap -p 3128 proxy | grep open`
+proxyready=$(nmap -p 3128 proxy | grep open)
 while [ $? != 0 ];do
    echo "Waiting for proxy to be ready..." >> ${logfile}
-   proxyready=`nmap -p 3128 proxy | grep open`
+   proxyready=$(nmap -p 3128 proxy | grep open)
    sleep 1
 done
 
@@ -30,7 +30,7 @@ while true;do
       > /tmp/rootgitdone
       break
    else
-      gitresult=`grep 'could not be found' ${logfile}`
+      gitresult=$(grep 'could not be found' ${logfile})
       if [ $? = 0 ];then
          echo "The git project ${gitproject} does not exist." >> ${logfile}
          echo "FAIL - No GIT Project" > $startupstatus
@@ -39,7 +39,7 @@ while true;do
          echo "Could not complete git pull. Will try again." >> ${logfile}
       fi
   fi
-  ctr=`expr $ctr + 1`
+  ctr=$(expr $ctr + 1)
   sleep 5
 done
 

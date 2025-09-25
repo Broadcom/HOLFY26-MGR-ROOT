@@ -23,7 +23,7 @@ secure_holuser () {
   if [ "${vlp_cloud}" != "NOT REPORTED" ] ;then
     echo "PRODUCTION - SECURING HOLUSER."
     cat ~root/test2.txt | mcrypt -d -k bca -q > ~root/clear.txt
-    pw=`cat ~root/clear.txt`
+    pw=$(cat ~root/clear.txt)
     passwd holuser <<END
 $pw
 $pw
@@ -49,7 +49,7 @@ END
 
 maincon="console"
 # the password MUST be hardcoded here in order to complete the mount
-password=`cat /home/holuser/creds.txt`
+password=$(cat /home/holuser/creds.txt)
 configini="/tmp/config.ini"
 LMC=false
 lmcbookmarks="holuser@${maincon}:/home/holuser/.config/gtk-3.0/bookmarks"
@@ -116,7 +116,7 @@ while true;do
    sleep 2
 done
 
-if `nc -z $maincon 2049`;then
+if $(nc -z $maincon 2049);then
    echo "LMC detected. Performing NFS mount..."
    while [ ! -d /lmchol/home/holuser/desktop-hol ];do
       echo "Mounting / on the LMC to /lmchol..."
@@ -127,7 +127,7 @@ if `nc -z $maincon 2049`;then
 fi
 
 while [ ! -f /wmchol/hol/LabStartup.log ] && [ $LMC = false ];do
-   if `nc -z $maincon 445`;then
+   if $(nc -z $maincon 445);then
       echo "WMC detected. Performing administrative CIFS mount..."
       mount -t cifs --verbose -o rw,user=Administrator,pass=${password},file_mode=0777,soft,dir_mode=0777,noserverino //${maincon}/C$/ /wmchol
    fi
@@ -150,7 +150,7 @@ vlp_cloud="NOT REPORTED"
 while [ "${vlp_cloud}" = "NOT REPORTED" ];do
    sleep 5
    if [ -f $cloudinfo ];then
-      vlp_cloud=`cat $cloudinfo`
+      vlp_cloud=$(cat $cloudinfo)
       echo "vlp_cloud: $vlp_cloud"
       break
    fi
