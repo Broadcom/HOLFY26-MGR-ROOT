@@ -218,8 +218,9 @@ while [ ! -f /wmchol/hol/LabStartup.log ] && [ $LMC = false ];do
    if [ $CNT -eq 3 ]; then
       log_message "Failed to mount WMC and LMC, failing..."
       mark_mount_failed "Neither LMC (port 2049) nor WMC (port 445) detected on ${MAINCON}"
-      Exit 1
-      break
+      mkdir -p /lmchol/hol
+      echo "Fail to mount console... aborting labstartup..." > /lmchol/hol/startup_status.txt
+      exit 1
    fi
 done
 
