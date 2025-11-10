@@ -191,7 +191,7 @@ for i in $(seq 1 6); do
       while [ ! -d /lmchol/home/holuser/desktop-hol ];do
          log_message "Mounting / on the LMC to /lmchol..."
          mount -t nfs -o soft,timeo=50,retrans=5,_netdev ${maincon}:/ /lmchol
-         sleep 2
+         sleep 20
       done
       LMC=true
       break # Exit the loop on success
@@ -203,7 +203,7 @@ for i in $(seq 1 6); do
    fi
 
    log_message "Attempt $i/6 failed. Retrying in 10 seconds..."
-   sleep 10
+   sleep 20
 done
 
 # Only check for WMC if LMC not detected
